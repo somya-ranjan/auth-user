@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userSignIn } from "../../store/actions";
+import errorHandler from "../../utility/errorHandler";
 
 function Login() {
   // // initial state
@@ -28,19 +29,18 @@ function Login() {
         setLoading(false);
       })
       .catch(function (error) {
-        alert(error?.response?.data?.error || "Opps! Something went wrong");
         setLoading(false);
+        errorHandler(error);
       });
   };
 
   return (
     <Container>
       <Row className="justify-content-center align-items-center vh-100">
-        <Col xs={5}>
+        <Col xs={12} md={6} lg={5} xl={4}>
           <Card>
-            <h6 className="text-center">Login</h6>
             <CardBody>
-              {" "}
+              <h4 className="text-center">Login</h4>{" "}
               <AvForm onValidSubmit={handelSubmit}>
                 <AvField
                   name="email"
@@ -65,7 +65,7 @@ function Login() {
                   }}
                 />
                 <Button color="primary" disabled={isLoading} className="w-100">
-                  {isLoading ? "Loading..." : "Submit"}
+                  {isLoading ? "Login..." : "Submit"}
                 </Button>
               </AvForm>
             </CardBody>
